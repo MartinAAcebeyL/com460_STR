@@ -13,6 +13,15 @@ RELOJ = 'reloj'
 
 @js.use(app)
 class App:
+    def __init__(self):
+        self.degrees = 0
+    def bajar_temperatura(self):
+        global TEMPERATURA
+        global LISTA_I
+        TEMPERATURA -= 3
+        time.sleep(0.5)
+        LISTA_I[2] = TEMPERATURA
+
     @js.task
     def main_ajax(self):
         while True:
@@ -27,6 +36,13 @@ class App:
             self.js.document.getElementById('t3').style.backgroundColor = 'green' if LISTA_I[2] < 38 else 'red'
             #reloj
             self.js.document.getElementById('reloj').innerHTML = RELOJ
+            #foco
+            self.js.document.getElementById('foco').style.backgroundColor = 'green' if LISTA_I[2] < 38 else 'red'
+            #ventilador
+            self.degrees = self.degrees + 1 if LISTA_I[2] < 30 else self.degrees+5
+            self.js.document.getElementById('ventilador').style.transform = f'rotate({self.degrees}deg)'
+            if self.degrees > 359:
+                self.degrees = 1
 
 
 def temperaturas_():
@@ -66,6 +82,7 @@ def index():
 if __name__ == '__main__':
     thread_temperatura = threading.Thread(target=temperaturas_, daemon=True)
     thread_temperatura.start()
+
     thread_tiempo = threading.Thread(target=reloj_, daemon=True)
     thread_tiempo.start()
 

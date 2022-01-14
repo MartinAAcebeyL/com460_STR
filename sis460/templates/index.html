@@ -11,32 +11,7 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
-    <style>
-      @keyframes rotate {
-        from {
-          transform: rotate(0deg);
-        }
-        to {
-          transform: rotate(360deg);
-        }
-      }
-      .imgr {
-        -webkit-animation: 6s rotate linear infinite;
-        animation: 1s rotate linear infinite;
-        -webkit-transform-origin: 50% 50%;
-        transform-origin: 50% 50%;
-      }
-      .imgr1 {
-        -webkit-animation: 6s rotate linear infinite;
-        animation: 0.1s rotate linear infinite;
-        -webkit-transform-origin: 50% 50%;
-        transform-origin: 50% 50%;
-      }
-
-      .calentador {
-        filter: brightness(50%);
-      }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
   </head>
   <body>
     <div class="row mt-4 mb-4">
@@ -99,30 +74,17 @@
 
           <div class="row mt-4">
             <div class="col-4">
-              <figure class="figure">
-                <img
+              <p>Foco</p>
+              <div style="width:120px; height:120px; border-radius:50%; background-color: yellow;" id="foco">
+              </div>
+              <button onclick="server.bajar_temperatura()">Bajar temmperatura</button>
+            </div>
 
-                  id="foco"
-                  src=""
-                  class="figure-img img-fluid rounded"
-                  width="100px"
-                />
-                <figcaption class="figure-caption text-center">Foco</figcaption>
-              </figure>
-            </div>
             <div class="col-4">
-              <figure class="figure">
-                <img
-                  src=""
-                  id="ventilador"
-                  class="figure-img img-fluid rounded"
-                  width="150px"
-                />
-                <figcaption class="figure-caption text-center">
-                  Ventilador
-                </figcaption>
-              </figure>
+              <p>Ventilador</p>
+              <div id="ventilador"></div>
             </div>
+
             <div class="col-4">
               <figure class="figure">
                 <img
